@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Hello</h1>
+  {% if request.user.is_authenticated %}
+    <h4><a href="{% url 'todo_create_view' %}">New "ToDo" Item</a></h4>
+    {% for x in list %}
+      {% if x.user == request.user %}
+        {% if not x.complete %}
+          <h2><a href="{% url 'todo_detail_view' x.id %}">{{ x }}</a></h2>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <h1>Please Login To View Your "ToDo" List!</h1>
+  {% endif %}
 {% endblock %}

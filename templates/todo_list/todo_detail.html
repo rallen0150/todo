@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+  <h1>{{ item }}</h1>
+  {% if not item.complete %}
+    <a href="{% url 'todo_update_view' item.id %}">Completed?</a>
+  {% endif %}
+  <h3>{{ item.description }}</h3>
+  <h4>{{ item.date }}</h4>
+  {% if not item.complete %}
+    <h4>The task is <i>NOT</i> completed yet!</h4>
+  {% else %}
+    <h4>The task <i>IS</i> completed!</h4>
+  {% endif %}
+</div>
+{% endblock %}
