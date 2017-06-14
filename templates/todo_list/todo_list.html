@@ -86,34 +86,65 @@
     .login-help{
       font-size: 12px;
     }
+    #register {
+      max-width: 250px;
+    }
+    #item {
+      color: blue;
+    }
   </style>
 {% endblock %}
 
 {% block content %}
   <div class="text-center">
     {% if request.user.is_authenticated %}
-      <h4><a href="{% url 'todo_create_view' %}">New "ToDo" Item</a></h4>
-      {% for x in list %}
-        {% if x.user == request.user %}
-          {% if not x.complete %}
-            <h2><a href="{% url 'todo_detail_view' x.id %}">{{ x }}</a></h2>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h2>Tasks Left to Complete</h2>
+      </div>
+      <div class="panel-body">
+        <h4><a id="new_item" href="{% url 'todo_create_view' %}"><i class="fa fa-plus-circle"></i> New "ToDo" Item</a></h4>
+        <ol>
+          {% for x in list %}
+            {% if x.user == request.user %}
+              {% if not x.complete %}
+              <div class="modal-dialog">
+                <div class="loginmodal-container">
+                  <h2><a id="item" href="{% url 'todo_detail_view' x.id %}"><li>{{ x }}</li></a></h2>
+                </div>
+              </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
     {% else %}
+
     <div class="modal-dialog">
       <div class="loginmodal-container">
-        <h1>Please Login To View Your "ToDo" List!</h1>
-        <form class="" action="{% url 'login' %}" method="post">
-          {% csrf_token %}
-          <p><input type="text" name="username" placeholder="Username"></p>
-    			<p><input type="password" name="password" placeholder="Password"></p>
-    			<p><input type="submit" name="login" class="login loginmodal-submit" value="Login"></p>
-        </form>
+        <h1>Register as a New User</h1>
         <hr>
-        <div class="login-help">
-				   <a href="{% url 'user_create_view' %}"><b>Register</b></a>
-			  </div>
+        <form class="" action="{% url 'user_create_view' %}" method="post">
+          {% csrf_token %}
+          <label for="id_username">Username:</label>
+          <p><input type="text" name="username" value="" autofocus="" required="" maxlength="150" id="id_username"></p>
+          <p><span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+          <label for="id_password1">Password:</label>
+          <p><input type="password" name="password1" required="" id="id_password1"></p>
+          <ul>
+            <li>Your password can't be too similar to your other personal information.</li>
+            <li>Your password must contain at least 8 characters.</li>
+            <li>Your password can't be a commonly used password.</li>
+            <li>Your password can't be entirely numeric.</li>
+          </ul>
+          <br>
+          <ul class="errorlist"><li>This field is required.</li></ul>
+          <br>
+          <label for="id_password2">Password Confirmation:</label>
+          <p><input type="password" name="password2" required="" id="id_password2"></p>
+          <p><input type="submit" name="login" class="login loginmodal-submit" value="New User"></p>
+        </form>
       </div>
     </div>
     {% endif %}

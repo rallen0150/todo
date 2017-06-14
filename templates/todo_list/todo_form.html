@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 
 {% block css %}
-<style media="screen">
-  .form-area {
-    background-color: #FAFAFA;
-    padding: 10px 40px 60px;
-    margin: 10px 0px 60px;
-    border: 1px solid GREY;
-  }
-  #task {
-    text-decoration: underline;
-  }
-</style>
+  <style media="screen">
+    .form-area {
+      background-color: #FAFAFA;
+      padding: 10px 40px 60px;
+      margin: 10px 0px 60px;
+      border: 1px solid GREY;
+    }
+    #task {
+      text-decoration: underline;
+    }
+  </style>
 {% endblock %}
 {% block content %}
+  <a href="{% url 'todo_view' %}">Back</a><br>
   <div class="col-md-3"></div>
   <div class="col-md-5">
     <div class="form-area">

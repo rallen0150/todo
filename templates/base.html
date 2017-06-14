@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,14 +17,37 @@
       body {
         background-color: #F5DEB3;
       }
+      .navbar-right {
+        padding-right: 100px;
+      }
+      #login {
+        font-size: 18px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'logout' %}?next={% url 'todo_view' %}">Logout</a>
-      {% endif %}
-      <br><br>
+      <div class="navbar navbar-default">
+        {% if not request.user.is_authenticated %}
+        <div class="container">
+          <form class="navbar-form navbar-right" action="{% url 'login' %}" method="post">
+            <b id="login">Login:</b>
+            {% csrf_token %}
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Username">
+              </div>
+              <div class="form-group">
+                <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-default">Sign In</button>
+          </form>
+        </div>
+        {% else %}
+          <nav class="nav navbar-nav navbar-right">
+            <a href="{% url 'logout' %}?next={% url 'todo_view' %}"><i class="fa fa-power-off"></i> Logout</a>
+          </nav>
+        {% endif %}
+      </div>
       {% block content %}
 
       {% endblock %}
