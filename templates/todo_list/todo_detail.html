@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<a href="{% url 'todo_view' %}">Back</a>
 <div class="text-center">
   <h1>{{ item }}</h1>
   {% if not item.complete %}

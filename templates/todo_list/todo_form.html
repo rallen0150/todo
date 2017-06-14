@@ -1,20 +1,52 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<style media="screen">
+  .form-area {
+    background-color: #FAFAFA;
+    padding: 10px 40px 60px;
+    margin: 10px 0px 60px;
+    border: 1px solid GREY;
+  }
+  #task {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
 {% block content %}
-  <form class="" action="" method="post">
-    {% csrf_token %}
-    <p>Title: <input type="text" name="title" placeholder="Title (100 char limit)"></p>
-    <p>Description: <textarea name="description" rows="5" cols="50" placeholder="Description of your task"></textarea></p>
-    <p>Completed?: <input type="checkbox" name="complete"></p>
-    <p>Date: <input type="text" name="date" id="datepicker"></p>
-    <input type="submit" name="" value="Create!">
-  </form>
+  <div class="col-md-3"></div>
+  <div class="col-md-5">
+    <div class="form-area">
+      <h2 id="task" class="text-center">New Task</h2><br>
+      <form class="" action="" method="post">
+        {% csrf_token %}
+        <p><input type="text" name="title" placeholder="Title (100 char limit)"></p>
+        <p><textarea name="description" rows="5" cols="50" placeholder="Description of your task"></textarea></p>
+        <p>Completed?: <input type="checkbox" name="complete"></p>
+        <p><input type="text" name="date" id="dob" placeholder="Date of Task"></p>
+        <input type="submit" name="" class="btn btn-success btn-lg" value="Create!">
+      </form>
+    </div>
+  </div>
 {% endblock %}
 
 {% block js %}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/themes/default.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/themes/default.date.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/themes/default.time.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/picker.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/picker.date.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/picker.time.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/legacy.js"></script>
+
   <script>
-    $(function(){
-      $("#datepicker").datepicker();
+    $(document).ready(function() {
+      $('#dob').pickadate({
+          format: 'mm/dd/yyyy',
+          formatSubmit: 'mm/dd/yyyy',
+          hiddenName: true
+      });
     });
   </script>
 {% endblock %}
