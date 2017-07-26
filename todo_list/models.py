@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime, time
 # Create your models here.
 class Todo(models.Model):
     user = models.ForeignKey('auth.User')
@@ -7,6 +7,7 @@ class Todo(models.Model):
     description = models.TextField()
     complete = models.BooleanField(default=False)
     date = models.DateField(auto_now=False, auto_now_add=False)
+    time = models.TimeField(null=True, blank=True, auto_now=False) #can add 'default=time(16, 00)'
 
     def __str__(self):
         return self.title

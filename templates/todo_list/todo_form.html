@@ -25,6 +25,7 @@
         <p><textarea name="description" rows="5" cols="50" placeholder="Description of your task"></textarea></p>
         <p>Completed?: <input type="checkbox" name="complete"></p>
         <p><input type="text" name="date" id="dob" placeholder="Date of Task"></p>
+        <p><input type="text" name="time" id="timepicker" data-time-format="H:i a" placeholder="Time of Task"></p>
         <input type="submit" name="" class="btn btn-success btn-lg" value="Create!">
       </form>
     </div>
@@ -41,6 +42,9 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/picker.time.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/legacy.js"></script>
 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
   <script>
     $(document).ready(function() {
       $('#dob').pickadate({
@@ -49,5 +53,6 @@
           hiddenName: true
       });
     });
+    $('#timepicker').timepicker();
   </script>
 {% endblock %}
