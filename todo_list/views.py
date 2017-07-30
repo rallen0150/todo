@@ -37,7 +37,7 @@ class TodoView(ListView):
 
 class TodoCreateView(CreateView):
     model = Todo
-    fields = ('title', 'description', 'complete', 'date')
+    fields = ('title', 'description', 'complete', 'date', 'time')
     success_url = reverse_lazy('todo_view')
 
     def form_valid(self, form):
