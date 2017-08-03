@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime, time
+from datetime import datetime, time, date
 # Create your models here.
 class Todo(models.Model):
     user = models.ForeignKey('auth.User')
@@ -15,3 +15,16 @@ class Todo(models.Model):
     #### Order by earlier date
     class Meta:
         ordering = ("date",)
+
+    @property
+    def is_past_due(self):
+        if date.today() > self.date:
+            return True
+        return False
+
+    # @property
+    # def past_time(self):
+    #     time_now = datetime.now().strftime('%I:%M %p')
+    #     if time_now > self.time:
+    #         return True
+    #     return False

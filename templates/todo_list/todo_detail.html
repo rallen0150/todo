@@ -19,6 +19,14 @@
         {% else %}
           <h4>The task <i>IS</i> completed!</h4>
         {% endif %}
+        <h5>{% now "g:i A" as now_time %}</h5>
+        <h5>{% now "m/d/Y" as now_day %}</h5>
+
+        {% if item.is_past_due %}
+          <h3>Past Due</h3>
+        {% else %}
+          <h3>Still have to do</h3>
+        {% endif %}
       </div>
     </div>
   </div>
